@@ -1,0 +1,25 @@
+// TOEIC Part5形式の問題データ。cat: grammar(文法) / vocab(語彙) / prep(前置詞・接続詞)
+window.QUESTIONS = [
+  { cat: "grammar", q: "The sales team ------- the quarterly report by Friday.", c: ["submit", "will submit", "submitting", "submitted by"], a: 1, e: "by Friday(金曜までに)は未来の期限なので未来形 will submit が適切。" },
+  { cat: "grammar", q: "Ms. Tanaka was ------- for her outstanding contribution to the project.", c: ["recognize", "recognizing", "recognized", "recognition"], a: 2, e: "be動詞の後で「認められた」という受動態。過去分詞 recognized が正解。" },
+  { cat: "grammar", q: "------- the heavy rain, the outdoor event went ahead as planned.", c: ["Although", "Despite", "Because", "However"], a: 1, e: "後ろが名詞句(the heavy rain)なので前置詞 Despite。Although は節を続ける接続詞。" },
+  { cat: "grammar", q: "Please contact us if you have any questions ------- the new policy.", c: ["regard", "regarding", "regarded", "regards of"], a: 1, e: "regarding は「~に関して」の前置詞。about と同様に使う。" },
+  { cat: "grammar", q: "The manager asked the staff to arrive ------- than usual tomorrow.", c: ["early", "earlier", "earliest", "more early"], a: 1, e: "than があるので比較級。early の比較級は earlier。" },
+  { cat: "grammar", q: "Neither the director nor the assistants ------- aware of the schedule change.", c: ["is", "was", "were", "has been"], a: 2, e: "neither A nor B は B(assistants)に動詞を一致させる。複数なので were。" },
+  { cat: "grammar", q: "The new software is ------- easier to use than the previous version.", c: ["much", "very", "more", "so"], a: 0, e: "比較級を強めるのは much / far / even / still。very は比較級を修飾できない。" },
+  { cat: "grammar", q: "All employees are required ------- their ID cards at all times.", c: ["wear", "to wear", "wearing", "worn"], a: 1, e: "be required to do の形。to 不定詞が続く。" },
+  { cat: "vocab", q: "The company plans to ------- its operations to Southeast Asia next year.", c: ["expand", "express", "explain", "expose"], a: 0, e: "expand A to B で「AをBに拡大する」。" },
+  { cat: "vocab", q: "Customers can receive a full ------- if they are not satisfied with the product.", c: ["refund", "reserve", "release", "resume"], a: 0, e: "full refund(全額返金)はTOEICの頻出表現。" },
+  { cat: "vocab", q: "The ------- for the position must have at least three years of experience.", c: ["applicant", "applicable", "application", "applied"], a: 0, e: "「応募者」を表す名詞は applicant。must have の主語になる人。" },
+  { cat: "vocab", q: "Due to unforeseen circumstances, the meeting has been ------- until next Monday.", c: ["postponed", "prevented", "promoted", "produced"], a: 0, e: "postpone は「延期する」。until next Monday と相性が良い。" },
+  { cat: "vocab", q: "The hotel offers ------- Wi-Fi access to all guests.", c: ["complimentary", "complicated", "complete", "competitive"], a: 0, e: "complimentary は「無料の」。ホテル・サービスの文脈で頻出。" },
+  { cat: "vocab", q: "Mr. Lee will ------- the new branch office starting next month.", c: ["oversee", "overlook", "overcome", "overdo"], a: 0, e: "oversee は「監督する」。overlook は「見落とす」で意味が合わない。" },
+  { cat: "vocab", q: "Please ------- the attached document for details of the schedule.", c: ["refer to", "refer at", "refer on", "refer in"], a: 0, e: "refer to ~ で「~を参照する」。" },
+  { cat: "vocab", q: "The factory's output has ------- increased since the new machines were installed.", c: ["significantly", "significant", "signify", "significance"], a: 0, e: "動詞 increased を修飾するのは副詞 significantly。" },
+  { cat: "prep", q: "The seminar will be held ------- the main conference room on the third floor.", c: ["in", "on", "at", "by"], a: 0, e: "部屋の中で開催されるので in the conference room。" },
+  { cat: "prep", q: "Applications must be received ------- April 30 to be considered.", c: ["by", "until", "during", "since"], a: 0, e: "by は期限(~までに)、until は継続(~までずっと)。応募の期限なので by。" },
+  { cat: "prep", q: "------- the budget is limited, we should prioritize the most urgent projects.", c: ["Since", "During", "Unless", "Whether"], a: 0, e: "Since は理由を表す接続詞(~なので)。後ろが節で、意味も通る。" },
+  { cat: "prep", q: "The package will arrive ------- two or three business days.", c: ["within", "among", "between", "along"], a: 0, e: "within は「~以内に」。期間の上限を表す。" },
+  { cat: "prep", q: "You will receive a confirmation email ------- you complete the registration.", c: ["once", "during", "while", "despite"], a: 0, e: "once は「~したらすぐ」の接続詞。後ろに節(you complete...)が続く。" },
+  { cat: "prep", q: "The store will remain open ------- 9 p.m. during the holiday season.", c: ["until", "by", "since", "for"], a: 0, e: "営業が続く終点を表すので until。remain open と継続の動詞に合う。" }
+];

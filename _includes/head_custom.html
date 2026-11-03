@@ -1,0 +1,136 @@
+<!--
+  簡易パスワードゲート。閲覧者を絞るための簡易的な目隠しであり、強固なセキュリティ対策ではない。
+  このサイトはpublicリポジトリ(shingo0321/english-study)からビルドされた静的HTMLであり、
+  各ページの本文はビルド後のHTMLに直接埋め込まれているため、ページのソースを直接見れば
+  内容自体は読めてしまう(yaizu_festivalのgate.jsと同じ考え方・同じ限界)。
+-->
+<style id="gate-style">
+  body { visibility: hidden; }
+</style>
+<script>
+  (function () {
+    if (localStorage.getItem("claude-study-gate-unlocked") === "yes") {
+      var s = document.getElementById("gate-style");
+      if (s) s.remove();
+    }
+  })();
+</script>
+<style>
+  #gate-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #1a1a1a;
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    visibility: visible;
+  }
+  #gate-overlay .gate-box {
+    background: #fff;
+    border-radius: 8px;
+    padding: 2rem 2.5rem;
+    max-width: 320px;
+    width: 90%;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    text-align: center;
+  }
+  #gate-overlay .gate-title {
+    font-size: 0.95rem !important;
+    font-weight: 600;
+    margin: 0 0 1rem;
+    color: #1a1a1a;
+  }
+  #gate-overlay input[type="password"] {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.6rem 0.8rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 0.8rem;
+  }
+  #gate-overlay button {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    font-size: 1rem;
+    background: #1a1a1a;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  #gate-overlay button:hover {
+    background: #333;
+  }
+  #gate-overlay .gate-error {
+    color: #c0392b;
+    font-size: 0.85rem;
+    margin-top: 0.6rem;
+  }
+</style>
+<script>
+  (function () {
+    var GATE_PASSWORD_HASH =
+      "c857d09db23e6822e3600bc06ad8d58f92ed62bc8efd81c753f77048662cb97d";
+    var GATE_STORAGE_KEY = "claude-study-gate-unlocked";
+
+    async function sha256Hex(text) {
+      var data = new TextEncoder().encode(text);
+      var hashBuffer = await crypto.subtle.digest("SHA-256", data);
+      return [...new Uint8Array(hashBuffer)]
+        .map(function (b) { return b.toString(16).padStart(2, "0"); })
+        .join("");
+    }
+
+    function showGate() {
+      var overlay = document.createElement("div");
+      overlay.id = "gate-overlay";
+      overlay.innerHTML =
+        '<div class="gate-box">' +
+        '<div class="gate-title">パスワードを入力してください</div>' +
+        '<form id="gate-form">' +
+        '<input type="password" id="gate-password" autocomplete="off" autofocus />' +
+        '<button type="submit">開く</button>' +
+        '<div class="gate-error" id="gate-error" hidden>パスワードが違います</div>' +
+        '</form>' +
+        '</div>';
+      document.body.prepend(overlay);
+
+      document.getElementById("gate-form").addEventListener("submit", async function (e) {
+        e.preventDefault();
+        var input = document.getElementById("gate-password");
+        var hash = await sha256Hex(input.value);
+
+        if (hash === GATE_PASSWORD_HASH) {
+          localStorage.setItem(GATE_STORAGE_KEY, "yes");
+          overlay.remove();
+          var s = document.getElementById("gate-style");
+          if (s) s.remove();
+        } else {
+          document.getElementById("gate-error").hidden = false;
+          input.value = "";
+          input.focus();
+        }
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      if (localStorage.getItem(GATE_STORAGE_KEY) !== "yes") {
+        showGate();
+      }
+    });
+  })();
+</script>
+<style>
+  /* 横長の図が縮小されて読めなくならないよう、原寸表示にして横スクロールさせる */
+  .language-mermaid, pre:has(> code.language-mermaid), .mermaid {
+    overflow-x: auto;
+  }
+  .mermaid svg {
+    max-width: none !important;
+  }
+</style>
+<script src="{{ '/assets/js/read-aloud-dict.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/read-aloud.js' | relative_url }}" defer></script>
